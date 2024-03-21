@@ -13,7 +13,7 @@ public class Soda implements Serializable {
 
     @Id
     @Column(name = "id_soda")
-    private Long idSoda;
+    private int idSoda;
     @Column(name = "name")
     private String name;
     @Column(name = "code")
@@ -21,7 +21,7 @@ public class Soda implements Serializable {
     @Column(name = "price")
     private String price;
 
-    public Soda(Long idSoda, String name, String code, String price) {
+    public Soda(int idSoda, String name, String code, String price) {
         this.idSoda = idSoda;
         this.name = name;
         this.code = code;
@@ -31,11 +31,11 @@ public class Soda implements Serializable {
     public Soda() {
     }
 
-    public Long getIdSoda() {
+    public int getIdSoda() {
         return idSoda;
     }
 
-    public void setIdSoda(Long idSoda) {
+    public void setIdSoda(int idSoda) {
         this.idSoda = idSoda;
     }
 

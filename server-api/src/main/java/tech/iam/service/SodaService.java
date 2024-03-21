@@ -42,7 +42,7 @@ public class SodaService {
     }
 
     public void addSoda(SodaDto sodaDto) {
-        Long id = RandomGenerator.getDefault().nextLong();
+        int id = RandomGenerator.getDefault().nextInt();
         Soda soda = new Soda(id, sodaDto.getName(), sodaDto.getCode(), sodaDto.getPrice());
         sodaRepository.save(soda);
     }

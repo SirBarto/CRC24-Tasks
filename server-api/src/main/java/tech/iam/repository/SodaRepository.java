@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface SodaRepository extends JpaRepository<Soda, Long> {
+public interface SodaRepository extends JpaRepository<Soda, Integer> {
 
-    Optional<Soda> findSodaByIdSoda(Long id);
+    Optional<Soda> findSodaByIdSoda(int id);
     Optional<Soda> findSodaByName(String name);
     List<Soda> findAll();
 
