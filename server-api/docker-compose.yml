@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  #  backend:
+  #    image: crc_2024/backend
+  #    build: './server-api/'
+  #    ports:
+  #      - "453:443"
+  postgres:
+    container_name: "db_postgres_crc_2024"
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=crc24
+      - POSTGRES_PASSWORD=crc24
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - '5400:5432'
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+#       copy the sql script to create tables
+#      - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
