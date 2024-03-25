@@ -1,0 +1,1 @@
+ALTER TABLE soda DROP COLUMN color;

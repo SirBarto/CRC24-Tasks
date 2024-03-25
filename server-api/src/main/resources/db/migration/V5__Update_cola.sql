@@ -1,0 +1,1 @@
+UPDATE soda set color='black' where code = 'COLA';

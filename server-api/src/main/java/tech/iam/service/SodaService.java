@@ -75,4 +75,20 @@ public class SodaService {
         }
     }
 
+    //@Transactional
+    public void safe(){
+        Soda soda = new Soda();
+        soda.setIdSoda(10);
+        soda.setName("Tyskie");
+        soda.setCode("TYSKIE");
+        soda.setPrice("3.5");
+        sodaRepository.save(soda);
+      //  System.out.println(10/0);
+    }
+
+    public Optional<Soda> findSoda(){
+        int id =2;
+        return sodaRepository.findSodaWithId(id);
+    }
+
 }

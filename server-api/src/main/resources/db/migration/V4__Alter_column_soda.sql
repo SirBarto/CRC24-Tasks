@@ -1,0 +1,1 @@
+ALTER TABLE soda add color varchar(20);
