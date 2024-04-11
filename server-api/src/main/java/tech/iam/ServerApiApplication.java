@@ -7,8 +7,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.event.EventListener;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import tech.iam.config.PersistConfig;
+import tech.iam.config.SecurityConfig;
 import tech.iam.config.ServiceConfiguration;
 import tech.iam.controller.SodaController;
+import tech.iam.controller.UserController;
 import tech.iam.entity.Soda;
 import tech.iam.service.SodaJdbcService;
 import tech.iam.service.SodaService;
@@ -17,8 +20,8 @@ import java.util.Optional;
 
 @SpringBootApplication
 @EnableWebMvc
-@ComponentScan(basePackageClasses = SodaController.class)
-@Import({ServiceConfiguration.class})
+@ComponentScan(basePackageClasses = {SodaController.class, UserController.class})
+@Import({ServiceConfiguration.class, SecurityConfig.class, PersistConfig.class})
 public class ServerApiApplication {
     public static void main(String[] args) {
         System.out.println("CRC_2024");

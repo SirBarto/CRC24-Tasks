@@ -8,7 +8,10 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import tech.iam.config.annotation.PublicApi;
+import tech.iam.config.annotation.SecuredRestController;
 import tech.iam.dto.SodaDto;
 import tech.iam.entity.Soda;
 import tech.iam.service.SodaService;
@@ -16,7 +19,9 @@ import tech.iam.service.SodaService;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+import static tech.iam.config.annotation.SecuredRestController.ADMIN_ROLE;
+
+@SecuredRestController
 @Slf4j
 @Tag(name="Soda controller")
 public class SodaController {
@@ -32,6 +37,8 @@ public class SodaController {
     }
 
     @GetMapping(URL_SODA)
+    @PreAuthorize(ADMIN_ROLE)
+    //@PublicApi
     public ResponseEntity<Page<SodaDto>> getAll(Pageable pageable){
         Page<Soda> allSoda = sodaService.getAllSoda(pageable);
         List<SodaDto> resultList = new ArrayList<>();
