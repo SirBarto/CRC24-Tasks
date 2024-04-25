@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import tech.iam.config.annotation.PublicApi;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static tech.iam.config.annotation.SecuredRestController.ADMIN_ROLE;
+import static tech.iam.config.annotation.SecuredRestController.AUDITOR_ROLE;
 
 @SecuredRestController
 @Slf4j
@@ -37,7 +39,7 @@ public class SodaController {
     }
 
     @GetMapping(URL_SODA)
-    @PreAuthorize(ADMIN_ROLE)
+    @PreAuthorize(ADMIN_ROLE + " OR " + AUDITOR_ROLE)
     //@PublicApi
     public ResponseEntity<Page<SodaDto>> getAll(Pageable pageable){
         Page<Soda> allSoda = sodaService.getAllSoda(pageable);
@@ -52,6 +54,7 @@ public class SodaController {
         return new ResponseEntity<>(new PageImpl<>(resultList, pageable, allSoda.getTotalElements()), HttpStatus.OK);
     }
     @GetMapping(URL_SODA_ELEMENT)
+    @PostAuthorize(value = ADMIN_ROLE)
     public ResponseEntity<SodaDto> getSoda(@PathVariable String sodaName){
         var soda = sodaService.getSoda(sodaName);
         if(soda.isEmpty()){
@@ -60,16 +63,16 @@ public class SodaController {
         return new ResponseEntity<>(soda.get(), HttpStatus.OK);
     }
 
-    @PutMapping(URL_SODA)
-    public ResponseEntity<SodaDto> createOrUpdateSoda(@RequestBody SodaDto sodaDto){
-       var soda = sodaService.getSoda(sodaDto.getName());
-       if(soda.isEmpty()){
-           sodaService.addSoda(sodaDto);
-       } else {
-           sodaService.updateSoda(sodaDto);
-       }
-       return new ResponseEntity<>(sodaDto, HttpStatus.OK);
-    }
+//    @PutMapping(URL_SODA)
+//    public ResponseEntity<SodaDto> createOrUpdateSoda(@RequestBody SodaDto sodaDto){
+//       var soda = sodaService.getSoda(sodaDto.getName());
+//       if(soda.isEmpty()){
+//           sodaService.addSoda(sodaDto);
+//       } else {
+//           sodaService.updateSoda(sodaDto);
+//       }
+//       return new ResponseEntity<>(sodaDto, HttpStatus.OK);
+//    }
 
     @DeleteMapping(URL_SODA_ELEMENT)
     public void deleteSoda(@PathVariable String sodaName){

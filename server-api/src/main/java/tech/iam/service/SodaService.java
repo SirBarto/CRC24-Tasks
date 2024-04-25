@@ -47,12 +47,12 @@ public class SodaService {
         sodaRepository.save(soda);
     }
 
-    public void updateSoda(SodaDto sodaDto) {
-        Optional<Soda> soda = sodaRepository.findSodaByName(sodaDto.getName());
+    public void updateSoda(SodaDto oldSodaDto, SodaDto updatedSodaDto) {
+        Optional<Soda> soda = sodaRepository.findSodaByName(oldSodaDto.getName());
         if (soda.isPresent()) {
-            soda.get().setName(sodaDto.getName());
-            soda.get().setCode(sodaDto.getCode());
-            soda.get().setPrice(sodaDto.getPrice());
+            soda.get().setName(updatedSodaDto.getName());
+            soda.get().setCode(updatedSodaDto.getCode());
+            soda.get().setPrice(updatedSodaDto.getPrice());
             sodaRepository.save(soda.get());
         }
     }
@@ -66,14 +66,14 @@ public class SodaService {
 
     }
 
-    public void addOrUpdatePurpose(SodaDto sodaDto) {
-        var soda = getSoda(sodaDto.getName());
-        if (soda.isEmpty()) {
-            addSoda(sodaDto);
-        } else {
-            updateSoda(sodaDto);
-        }
-    }
+//    public void addOrUpdatePurpose(SodaDto sodaDto) {
+//        var soda = getSoda(sodaDto.getName());
+//        if (soda.isEmpty()) {
+//            addSoda(sodaDto);
+//        } else {
+//            updateSoda(sodaDto);
+//        }
+//    }
 
     //@Transactional
     public void safe(){
