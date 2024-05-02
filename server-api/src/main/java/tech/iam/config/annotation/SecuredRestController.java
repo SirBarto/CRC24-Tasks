@@ -18,5 +18,6 @@ public @interface SecuredRestController {
 
     String ADMIN_ROLE = "hasAuthority('admin')";
     String USER_ROLE = "hasAuthority('user')";
+    String AUDITOR_ROLE = "hasAuthority('role_viewer')";
 
 }

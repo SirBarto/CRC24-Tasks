@@ -15,13 +15,13 @@ public class SpringJdbcConfig {
     @Value("username")
     String username;
 
-    @Bean
-    public DataSource postgresDataSource(){
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5400/postgres");
-        dataSource.setUsername("crc24");
-        dataSource.setPassword("crc24");
-        return dataSource;
-    }
+//    @Bean
+//    public DataSource postgresDataSource(){
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName("org.postgresql.Driver");
+//        dataSource.setUrl("jdbc:postgresql://localhost:5400/postgres");
+//        dataSource.setUsername("crc24");
+//        dataSource.setPassword("crc24");
+//        return dataSource;
+//    }
 }
